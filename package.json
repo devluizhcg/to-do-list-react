@@ -1,0 +1,30 @@
+{
+  "name": "to-do-list-react",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "format": "biome format src --write",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "lucide-react": "0.435.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "uuidv7": "^1.0.2"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.3.5",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "10.4.20",
+    "globals": "^15.9.0",
+    "postcss": "8.4.41",
+    "tailwindcss": "3.4.10",
+    "typescript": "^5.5.3",
+    "vite": "^5.4.1"
+  }
+}
