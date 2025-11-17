@@ -1,33 +1,17 @@
-import { ITasks } from "../tasks";
+import {ITasks} from "../tasks";
 import TaskModel from "../model/task-model.ts";
 import uuid7Generate from "./uuid7Generate.ts";
 
-/**
- * Utility function to create a delay using Promises.
- * @param ms The delay time in milliseconds.
- */
-const delay = (ms: number): Promise<void> => {
-	return new Promise((resolve) => setTimeout(resolve, ms));
-};
+export async function* addValuesWithDelayGenerator(
+    values: Pick<ITasks, "title" | "description">[],
+    intervalMs: number = 300
+): AsyncGenerator<ITasks> {
+    for (const value of values) {
+        const uuid7 = uuid7Generate.generateV7();
+        yield new TaskModel(uuid7, value.title, value.description);
 
-export async function addValuesWithDelay(
-	values: Pick<ITasks, "title" | "description">[],
-	intervalMs: number,
-): Promise<ITasks[]> {
-	const result: ITasks[] = [];
-
-	for (let i = 0; i < values.length; i++) {
-		const value = values[i];
-		const uuid7 = uuid7Generate.generateV7();
-
-		const newTask = new TaskModel(uuid7, value.title, value.description);
-
-		result.push(newTask);
-
-		await delay(intervalMs);
-	}
-
-	return result;
+        await new Promise(resolve => setTimeout(resolve, intervalMs));
+    }
 }
 
 export const valuesMockTasks: Pick<ITasks, "title" | "description">[] = [

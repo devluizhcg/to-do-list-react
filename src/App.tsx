@@ -1,11 +1,11 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import Tasks from "./components/Tasks.tsx";
-import { ITasks } from "./tasks";
+import {ITasks} from "./tasks";
 import AddTasks from "./components/AddTasks.tsx";
 import uuid7Generate from "./utils/uuid7Generate.ts";
-import { UUID } from "uuidv7";
-import { addValuesWithDelay, valuesMockTasks } from "./utils/mock-task-list.ts";
+import {UUID} from "uuidv7";
+import {addValuesWithDelayGenerator, valuesMockTasks} from "./utils/mock-task-list.ts";
 
 function App() {
 	const { generateV7 } = uuid7Generate;
@@ -32,9 +32,20 @@ function App() {
 	}
 
 	useEffect(() => {
-		addValuesWithDelay(valuesMockTasks, 300)
-			.then(setTasks)
-			.catch(console.error);
+        let isMounted = true;
+
+        (async (): Promise<void> => {
+            for await (const task of addValuesWithDelayGenerator(valuesMockTasks, 700)) {
+                if (isMounted) {
+                    setTasks(prev => [...prev, task]);
+                }
+            }
+        })().catch(console.error);
+
+
+        return () => {
+            isMounted = false
+        }
 	}, []);
 
 	return (
