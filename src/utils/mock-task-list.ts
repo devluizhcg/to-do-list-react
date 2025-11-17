@@ -1,17 +1,17 @@
-import {ITasks} from "../tasks";
+import { ITasks } from "../tasks";
 import TaskModel from "../model/task-model.ts";
 import uuid7Generate from "./uuid7Generate.ts";
 
 export async function* addValuesWithDelayGenerator(
-    values: Pick<ITasks, "title" | "description">[],
-    intervalMs: number = 300
+	values: Pick<ITasks, "title" | "description">[],
+	intervalMs: number = 300,
 ): AsyncGenerator<ITasks> {
-    for (const value of values) {
-        const uuid7 = uuid7Generate.generateV7();
-        yield new TaskModel(uuid7, value.title, value.description);
+	for (const value of values) {
+		const uuid7 = uuid7Generate.generateV7();
+		yield new TaskModel(uuid7, value.title, value.description);
 
-        await new Promise(resolve => setTimeout(resolve, intervalMs));
-    }
+		await new Promise((resolve) => setTimeout(resolve, intervalMs));
+	}
 }
 
 export const valuesMockTasks: Pick<ITasks, "title" | "description">[] = [
