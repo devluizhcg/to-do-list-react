@@ -9,16 +9,15 @@ export default function Tasks(props: ITasksProps) {
 				<li className={"btn w-full"}>Carregando...</li>
 			) : (
 				props.tasks.map((t: TaskModel, index) => (
-					<li
-						key={t.idAsString ?? index}
-						className={"flex gap-2"}
-						onClick={() => props.onTaskClick(t.id)}
-					>
+					<li key={t.idAsString ?? index} className={"flex gap-2"}>
 						<button className={`${t.completed && "line-through "} btn w-full`}>
 							{t.title}
 						</button>
 
-						<button className={`btn ${t.completed && "bg-green"}`}>
+						<button
+							className={`btn ${t.completed && "bg-green"}`}
+							onClick={() => props.onTaskClick(t.id)}
+						>
 							{t.completed ? <CheckCircleIcon /> : <ChevronRightIcon />}
 						</button>
 

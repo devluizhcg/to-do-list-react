@@ -1,73 +1,85 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import Tasks from "../components/Tasks.tsx";
-import {ITasks} from "../tasks";
+import { ITasks } from "../tasks";
 import AddTasks from "../components/AddTasks.tsx";
-import uuid7Generate from "../utils/uuid7Generate.ts";
-import {UUID} from "uuidv7";
-import {addValuesWithDelayGenerator, valuesMockTasks,} from "../utils/mock-task-list.ts";
+import uuid7Generate from "../utils/uuid7-generate.ts";
+import { UUID } from "uuidv7";
+import {
+	addValuesWithDelayGenerator,
+	valuesMockTasks,
+} from "../utils/mock-task-list.ts";
+import { useNavigate } from "react-router-dom";
+import { encodeUtils } from "../utils/url-convert-object.ts";
 
 function HomePage() {
-    const { generateV7 } = uuid7Generate;
+	const { generateV7 } = uuid7Generate;
 
-    const [tasks, setTasks] = useState<ITasks[]>([]);
+	const [tasks, setTasks] = useState<ITasks[]>([]);
+	const navigate = useNavigate();
 
-    function onTaskClick(id: UUID): void {
-        setTasks(
-            tasks.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t)),
-        );
-    }
+	function onSeeDetailsClick(task: ITasks): void {
+		navigate(`/task?obj=${encodeUtils<ITasks>(task)}`);
+	}
 
-    function onTaskClickDelete(id: UUID): void {
-        setTasks(
-            tasks.splice(
-                tasks.findIndex((t) => t.id === id),
-                1,
-            ),
-        );
-    }
+	function onTaskClick(id: UUID): void {
+		const task = tasks.find((t) => t.id === id);
 
-    function onAddTask(newTask: ITasks): void {
-        setTasks([...tasks, newTask]);
-    }
+		if (!task) return console.error("Task not found");
 
-    useEffect(() => {
-        let isMounted = true;
+		onSeeDetailsClick(task);
+	}
 
-        (async (): Promise<void> => {
-            for await (const task of addValuesWithDelayGenerator(
-                valuesMockTasks,
-                700,
-            )) {
-                if (isMounted) {
-                    setTasks((prev) => [...prev, task]);
-                }
-            }
-        })().catch(console.error);
+	function onTaskClickDelete(id: UUID): void {
+		setTasks(
+			tasks.splice(
+				tasks.findIndex((t) => t.id === id),
+				1,
+			),
+		);
+	}
 
-        return () => {
-            isMounted = false;
-        };
-    }, []);
+	function onAddTask(newTask: ITasks): void {
+		setTasks([...tasks, newTask]);
+	}
 
-    return (
-        <>
-            <div className="w-screen h-screen bg-slate-500 flex justify-center pt-4">
-                <div className="w-[500px] flex gap-4 flex-col">
-                    <h1 className="text-3xl text-slate-100 font-bold text-center">
-                        Gerenciador de Tarefas
-                    </h1>
+	useEffect(() => {
+		let isMounted = true;
 
-                    <AddTasks onAddTask={onAddTask} />
+		(async (): Promise<void> => {
+			for await (const task of addValuesWithDelayGenerator(
+				valuesMockTasks,
+				700,
+			)) {
+				if (isMounted) {
+					setTasks((prev) => [...prev, task]);
+				}
+			}
+		})().catch(console.error);
 
-                    <Tasks
-                        tasks={tasks}
-                        onTaskClick={onTaskClick}
-                        onTaskClickDelete={onTaskClickDelete}
-                    />
-                </div>
-            </div>
-        </>
-    );
+		return () => {
+			isMounted = false;
+		};
+	}, []);
+
+	return (
+		<>
+			<div className="w-screen h-screen bg-slate-500 flex justify-center pt-4">
+				<div className="w-[500px] flex gap-4 flex-col">
+					<h1 className="text-3xl text-slate-100 font-bold text-center">
+						Gerenciador de Tarefas
+					</h1>
+
+					<AddTasks onAddTask={onAddTask} />
+
+					<Tasks
+						tasks={tasks}
+						onTaskClick={onTaskClick}
+						onTaskClickDelete={onTaskClickDelete}
+					/>
+				</div>
+			</div>
+		</>
+	);
 }
 
 export default HomePage;

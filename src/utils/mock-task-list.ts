@@ -1,6 +1,6 @@
 import { ITasks } from "../tasks";
 import TaskModel from "../model/task-model.ts";
-import uuid7Generate from "./uuid7Generate.ts";
+import uuid7Generate from "./uuid7-generate.ts";
 
 export async function* addValuesWithDelayGenerator(
 	values: Pick<ITasks, "title" | "description">[],

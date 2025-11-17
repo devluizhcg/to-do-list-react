@@ -18,17 +18,20 @@ body {
 	box-sizing: border-box;
 }
 
-/* biome-ignore-file */
-.btn {
-    @apply bg-slate-400 text-white p-2 rounded-md border-0
-}
+@layer components {
 
-/* biome-ignore-file */
-.card {
-    @apply space-y-2 p-4 bg-slate-200 rounded-md shadow-md
-}
+    /* biome-ignore-file */
+    .btn {
+        @apply bg-slate-400 text-white p-2 rounded-md border-0
+    }
 
-/* biome-ignore-file */
-.input {
-    @apply border-none border-slate-300 rounded-md outline-slate-400 py-2 px-4
+    /* biome-ignore-file */
+    .card {
+        @apply space-y-2 p-4 bg-slate-200 rounded-md shadow-md
+    }
+
+    /* biome-ignore-file */
+    .input {
+        @apply border-none border-slate-300 rounded-md outline-slate-400 py-2 px-4
+    }
 }
