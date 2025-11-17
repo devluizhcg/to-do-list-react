@@ -31,7 +31,7 @@ const TaskPage = () => {
 						<div className={"relative"}>
 							<button
 								onClick={() => navigate(ROUTES.HOME.path)}
-								className={"bg-slate-600 btn absolute top-[-5px] right-0"}
+								className={"bg-slate-600 btn absolute top-[-5px] right-[-20px]"}
 							>
 								<ChevronLeftIcon />
 							</button>
