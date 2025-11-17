@@ -1,4 +1,4 @@
-import { ITasks } from "../tasks";
+import {ITasks} from "../@types/tasks";
 import TaskModel from "../model/task-model.ts";
 import uuid7Generate from "./uuid7-generate.ts";
 

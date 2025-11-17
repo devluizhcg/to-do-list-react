@@ -1,8 +1,9 @@
 import {useNavigate, useSearchParams} from "react-router-dom";
 import {decodeUtils} from "../utils/url-convert-object.ts";
-import {ITasks} from "../tasks";
+import {ITasks} from "../@types/tasks";
 import {useEffect, useState} from "react";
 import {ChevronLeftIcon} from "lucide-react";
+import {ROUTES} from "../router";
 
 const TaskPage = () => {
 	const [searchParams] = useSearchParams();
@@ -29,7 +30,7 @@ const TaskPage = () => {
 						Detalhes da Tarefa
 						<div className={"relative"}>
 							<button
-								onClick={() => navigate('/')}
+								onClick={() => navigate(ROUTES.HOME.path)}
 								className={"bg-slate-600 btn absolute top-[-5px] right-0"}
 							>
 								<ChevronLeftIcon />

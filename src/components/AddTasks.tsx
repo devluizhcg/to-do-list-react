@@ -1,5 +1,5 @@
-import { IAddTasksProps } from "../tasks";
-import { useState } from "react";
+import {IAddTasksProps} from "../@types/tasks";
+import {useState} from "react";
 import TaskModel from "../model/task-model.ts";
 import uuid7Generate from "../utils/uuid7-generate.ts";
 

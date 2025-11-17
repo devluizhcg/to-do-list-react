@@ -1,15 +1,13 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import Tasks from "../components/Tasks.tsx";
-import { ITasks } from "../tasks";
+import {ITasks} from "../@types/tasks";
 import AddTasks from "../components/AddTasks.tsx";
 import uuid7Generate from "../utils/uuid7-generate.ts";
-import { UUID } from "uuidv7";
-import {
-	addValuesWithDelayGenerator,
-	valuesMockTasks,
-} from "../utils/mock-task-list.ts";
-import { useNavigate } from "react-router-dom";
-import { encodeUtils } from "../utils/url-convert-object.ts";
+import {UUID} from "uuidv7";
+import {addValuesWithDelayGenerator, valuesMockTasks,} from "../utils/mock-task-list.ts";
+import {useNavigate} from "react-router-dom";
+import {encodeUtils} from "../utils/url-convert-object.ts";
+import {ROUTES} from "../router";
 
 function HomePage() {
 	const { generateV7 } = uuid7Generate;
@@ -18,7 +16,10 @@ function HomePage() {
 	const navigate = useNavigate();
 
 	function onSeeDetailsClick(task: ITasks): void {
-		navigate(`/task?obj=${encodeUtils<ITasks>(task)}`);
+		navigate({
+			pathname: ROUTES.TASK.path,
+			search: `?obj=${encodeUtils(task)}`,
+		});
 	}
 
 	function onTaskClick(id: UUID): void {

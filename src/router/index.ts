@@ -1,15 +1,20 @@
 import {createBrowserRouter} from "react-router-dom";
 import HomePage from "../pages/HomePage.tsx";
 import TaskPage from "../pages/TaskPage.tsx";
+import {REROUTES} from "../@types/router";
 
+export const ROUTES: REROUTES = {
+	HOME: { path: "/" },
+	TASK: { path: "/task" },
+} as const;
 
 const router = createBrowserRouter([
 	{
-		path: "/",
+		path: ROUTES.HOME.path,
 		Component: HomePage,
 	},
 	{
-		path: "/task",
+		path: ROUTES.TASK.path,
 		Component: TaskPage,
 	},
 ]);
