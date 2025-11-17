@@ -12,7 +12,7 @@ import {ROUTES} from "../router";
 function HomePage() {
 	const { generateV7 } = uuid7Generate;
 
-	const [tasks, setTasks] = useState<ITasks[]>([]);
+	const [tasks, setTasks] = useState<ITasks[]>(JSON.parse(sessionStorage.getItem("tasks") ?? "[]"));
 	const navigate = useNavigate();
 
 	function onSeeDetailsClick(task: ITasks): void {
@@ -44,6 +44,8 @@ function HomePage() {
 	}
 
 	useEffect(() => {
+        if (tasks.length > 0) return;
+
 		let isMounted = true;
 
 		(async (): Promise<void> => {
@@ -61,6 +63,11 @@ function HomePage() {
 			isMounted = false;
 		};
 	}, []);
+
+    useEffect(() => {
+        sessionStorage.setItem("tasks", JSON.stringify(tasks));
+
+    }, [tasks]);
 
 	return (
 		<>
