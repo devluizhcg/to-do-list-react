@@ -1,5 +1,5 @@
-import {ITasks} from "../@types/tasks";
-import {UUID} from "uuidv7";
+import { ITasks } from "../@types/tasks";
+import { UUID } from "uuidv7";
 
 class TaskModel implements ITasks {
 	completed: boolean = false;

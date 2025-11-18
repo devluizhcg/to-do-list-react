@@ -1,9 +1,9 @@
-import {useNavigate, useSearchParams} from "react-router-dom";
-import {decodeUtils} from "../utils/url-convert-object.ts";
-import {ITasks} from "../@types/tasks";
-import {useEffect, useState} from "react";
-import {ChevronLeftIcon} from "lucide-react";
-import {ROUTES} from "../router";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { decodeUtils } from "../utils/url-convert-object.ts";
+import { ITasks } from "../@types/tasks";
+import { useEffect, useState } from "react";
+import { ChevronLeftIcon } from "lucide-react";
+import { ROUTES } from "../router";
 
 const TaskPage = () => {
 	const [searchParams] = useSearchParams();

@@ -1,10 +1,10 @@
-import {ITasksProps} from "../@types/tasks";
-import {CheckCircleIcon, ChevronRightIcon, TrashIcon} from "lucide-react";
+import { ITasksProps } from "../@types/tasks";
+import { CheckCircleIcon, ChevronRightIcon, TrashIcon } from "lucide-react";
 import TaskModel from "../model/task-model.ts";
 
 export default function Tasks(props: ITasksProps) {
 	return (
-		<ul className="card list-none">
+		<ul className="card list-none ">
 			{props.tasks.length === 0 ? (
 				<li className={"btn w-full"}>Carregando...</li>
 			) : (
